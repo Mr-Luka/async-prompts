@@ -8,10 +8,22 @@ function ask (options) {
           <label>${options.title}</label>
         </fieldset>`)
         // Check if they want a cancle button
-
+        if(options.cancel) {
+            const skipButton = document.createElement("button");
+            skipButton.type = "button";
+            skipButton.textContent = "Cancel";
+            // TODO: listen for a click on that cancel button
+        }
         // listen for the submit event on the inputs
 
         // when somone does submit it, resolve the data that was in the input box
-        console.log(popup)
+        // Insert that popup into the dom
+        document.body.appendChild(popup);
+        // put a very small timeout before we add the open class
+        setTimeout(function(){
+            popup.classList.add("open");
+
+        }, 0)
     })
 }
+
