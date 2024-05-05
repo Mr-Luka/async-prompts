@@ -48,3 +48,14 @@ function ask (options) {
     })
 }
 
+
+// Select all buttons that have a question
+async function askQuestion(e){
+    const button = e.currentTarget;
+    const cancel = "cancel" in button.dataset;
+
+    const answer = await ask({title: button.dataset.question, cancel: cancel});
+    console.log(answer);
+}
+const buttons = document.querySelectorAll("[data-question]");
+buttons.forEach(button=>{button.addEventListener("click", askQuestion)})
