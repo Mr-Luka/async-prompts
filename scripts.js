@@ -76,17 +76,22 @@ async function asyncMap(array, callback) {
     const results = [];
     // loop over our array
     for (const item of array) {
-        const result = await callback(item);
-        results.push(result);
+        results.push(await callback(item));
     }
     // When we are done the loop, return it
     return results;
 }
 
-async function askMany(){
-    for(const question of questions) {
-        const answer = await ask(question);
-        console.log(answer);
-    }
+async function go(){
+    const answers = await asyncMap(questions, ask);
+    console.log(answers)
 }
-askMany()
+go()
+
+// async function askMany(){
+//     for(const question of questions) {
+//         const answer = await ask(question);
+//         console.log(answer);
+//     }
+// }
+// askMany()
