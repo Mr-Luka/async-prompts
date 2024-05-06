@@ -29,6 +29,10 @@ function ask (options) {
             console.log(popup.firstChild)
             popup.firstElementChild.appendChild(skipButton)
             // TODO: listen for a click on that cancel button
+            skipButton.addEventListener("click", function(){
+                resolve(null);
+                destroyPopup(popup);
+            }, {once: true});
         }
         // listen for the submit event on the inputs
         popup.addEventListener("submit", function(e){
@@ -57,5 +61,22 @@ async function askQuestion(e){
     const answer = await ask({title: button.dataset.question, cancel: cancel});
     console.log(answer);
 }
+
 const buttons = document.querySelectorAll("[data-question]");
 buttons.forEach(button=>{button.addEventListener("click", askQuestion)})
+
+const questions = [
+    {title: "What is your name ?"},
+    {title: "What is your age?", cancel: true},
+    {title: "What is your dogs name?"},
+];
+
+
+
+async function askMany(){
+    for(const question of questions) {
+        const answer = await ask(question);
+        console.log(answer);
+    }
+}
+askMany()
