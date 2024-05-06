@@ -71,7 +71,17 @@ const questions = [
     {title: "What is your dogs name?"},
 ];
 
-
+async function asyncMap(array, callback) {
+    // Make an array to store our results
+    const results = [];
+    // loop over our array
+    for (const item of array) {
+        const result = await callback(item);
+        results.push(result);
+    }
+    // When we are done the loop, return it
+    return results;
+}
 
 async function askMany(){
     for(const question of questions) {
